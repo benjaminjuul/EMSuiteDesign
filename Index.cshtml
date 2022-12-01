@@ -1,57 +1,46 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
-    ViewData["Title"] = "Home Page";
 }
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <div class="card-deck">
-        <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-        <div class="card">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+<div class="layout-body sso-login">
+    <div class="layout-aside">
+
+    </div>
+    <div class="layout-main">
+        <div class="layout-main-slot">
+            <h1 class="em-signup-layout_title font-monospace">Sign in with SSO</h1>
+            <div class="form-width-sm">
+                <p class="em-signup-layout_desc">Enter your company Domain. </p>
+                <form action="" class="em-form em-form-label-inline">
+                    <div class="em-form-item is-error is-required is-no-asterisk">
+                        <div class="em-form-item_content">
+                            <div class="em-input em-input-xLarge is-empty em-input-show-label base-domain">
+                                <input type="text" autocomplete="domain" name="domain" aria-required="true" aria-label="Company Domain" id="domain" maxlength="128" class="em-input_inner" aria-invalid="true" />
+                                <label for="domain" class="em-input_label">Company Domain</label>
+                                <span class="em-input_suffix">
+                                    <span class="em-input_suffix-inner">
+
+                                    </span>
+                                    <i class="em-input_icon em-input_validation em-icon-error"></i>
+                                </span>
+                            </div>
+                            <div class="domain"> .azure.net</div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="EMSUITE" />
+                </form>
+                <button disabled="disabled" aria-disabled="true" type="button" class="btn-block mgt-md em-button-primary em-button-large is-disabled em-button">
+                    <span class="em-button_slot">Continue</span>
+                </button>
+                <button type="button" class="btn-block mgt-sm em-button-link em-button-small em-button">
+                    <span class="em-button_slot">I don't know the company domain</span>
+                </button>
             </div>
         </div>
     </div>
-}
-else 
-{
-        <div class="jumbotron">
-      <h1 class="display-4">Hello, world!</h1>
-      <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-      <hr class="my-4">
-      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-      <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-      </p>
-    </div>
-}
+</div>
 
-
-
+<h1>Sign in with SSO</h1>
+<p><a asp-area="" asp-controller="Saml" asp-action="InitiateSingleSignOn" class="btn btn-primary btn-lg">SSO to the Identity Provider</a></p>
