@@ -1,0 +1,317 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+nav.navbar.navbar-expand-sm.navbar-toggleable-sm.navbar-light.bg-white.border-bottom.box-shadow.mb-3 {
+    background: #007bff !important;
+    border-color: #007bff;
+}
+
+nav a {
+    color: #fff !important;
+}
+
+ul li a {
+}
+
+a.nav-link.text-dark {
+    color: #fff !important;
+}
+
+.form-width-sm {
+    width: 346px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form-width {
+    width: 420px;
+    max-width: 100%;
+}
+.em-login-methods_title {
+    position: relative;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 24px;
+
+}
+.em-login-methods_title:before {
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    background-color: #ededf4;
+}
+.em-login-methods_title span {
+    background-color: #fff;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: inline-block;
+    line-height: 24px;
+    position: relative;
+    z-index: 1;
+    color: #747487;
+}
+.em-login-methods_list.justify-between {
+    display: flex;
+}
+.em-login-methods_list {
+    text-align: center;
+}
+.em-login-methods_item {
+    display: inline-block;
+    width: 85px;
+    line-height: 38px;
+    padding: 0;
+    color: rgba(4,4,19.56);
+    text-align: center;
+}
+
+.layout-body {
+    -webkit-box-flex: 1;
+    flex: 1;
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.login-page .layout-body .layout-aside {
+    width: 38.5%;
+    text-align: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.layout-body .layout-main {
+    -webkit-box-flex: 1;
+    flex: 1;
+}
+.layout-main-slot {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.em-signup-layout-title {
+    text-align: center;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 48px;
+    margin-bottom: 32px;
+    text-transform: capitalize;
+}
+.form-width-sm {
+    width: 346px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.em-signup-layout_desc {
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 24px;
+}
+.sso-login .layout-main-slot .em-form{
+    width: 100%;
+}
+.em-form-item {
+    position: relative;
+}
+.em-form-item {
+    margin-bottom: 24px;
+}
+.em-form-item_content {
+    position: relative;
+    font-size: inherit;
+}
+.em-input {
+    position: relative;
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+}
+.sso-login .layout-main-slot .base-domain #domain {
+    padding-right: 100px;
+}
+.em-form-item.is-error .em-input_inner {
+    border-color: #b22424;
+}
+.em-input-xlarge.em-input-show-label .em-input_inner {
+    padding-top: 12px;
+    line-height: 28px;
+}
+.em-input-xlarge .em-input_inner {
+    height: 48px;
+}
+.em-input_inner {
+    -webkit-appearance: none;
+    background-image: none;
+    border-radius: 8px;
+    border: 1px solid #444b53;
+    box-sizing: border-box;
+    color: #131619;
+    display: inline-block;
+    outline: none;
+    padding: 0 12px;
+    width: 100%;
+    vertical-align: middle;
+}
+.em-input_inner {
+    letter-spacing: .03em;
+}
+.em-input_label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    right: 12px;
+    font-size: 16px;
+    margin-bottom: 0;
+    color: #6e7680;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: .4s cubic-bezier(.25,.8.25,1);
+    transition-duration: .3s;
+}
+label {
+    font-weight: normal;
+}
+.em-input-xlarge .em-input_suffix {
+    line-height: 48px;
+}
+.em-input_suffix {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    text-align: center;
+    color: #6e7680;
+    transition: all .3s;
+    pointer-events: none;
+}
+.em-input_suffix-inner {
+    pointer-events: all;
+}
+.em-input-xlarge .em-input_suffix {
+    line-height: 48px;
+}
+.em-form-item.is-error .em-input_validateIcon {
+    color: #b22424;
+}
+.em-form-item .em-input_validateIcon {
+    display: none;
+}
+.sso-login .layout-main-slot .domain {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    font-size: 16px;
+}
+.em-form-item_error {
+    color: #b22424;
+    font-size: 14px;
+    line-height: 1;
+    padding-top: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+.em-button.is-disabled {
+    color: #6e7680;
+    background-color: #f1f4f6;
+    border-color: transparent;
+}
+.em-button.is-disabled {
+    cursor: not-allowed;
+    background-image: none;
+    box-shadow: none;
+    text-decoration: none;
+    outline: 0;
+}
+.em-button-large {
+    font-size: 16px;
+}
+.mgt-md {
+    margin-top: 16px !important;
+}
+.em-button-large {
+    padding: 8px 16px;
+    border-radius: 10px;
+    line-height: 22px;
+}
+.em-button_slot {
+    -webkit-box-flex: 1;
+}
+.em-button_slot {
+    letter-spacing: 0.3em;
+}
+.em-button+.em-button {
+    margin-left: 8px;
+}
+.mgt-sm {
+    margin-top: 8px!important;
+}
+.em-button-link {
+    white-space: normal;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0;
+    color: red;
+    background-color: transparent;
+    border-color: transparent;
+}
+.em-button-small {
+    padding: 6px 16px;
+    font-size: 14px;
+    line-height: 18px;
+}
+.em-button {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+}
+.em-button {
+    font-weight: 500!important;
+}
+.em-button_slot {
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+}
+.em-button_slot {
+    letter-spacing: .03em;
+}
+.em-button-small {
+    font-size: 14px;
+    line-height: 18px;
+}
