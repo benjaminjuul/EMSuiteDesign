@@ -1,0 +1,53 @@
+﻿@model EMSuite.ViewModels.SamlConfigurationViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<h4>Create Identity provider</h4>
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="Create">
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Name" class="control-label"></label>
+                <input asp-for="@Model.Name" class="form-control" />
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Description" class="control-label"></label>
+                <input asp-for="@Model.Description" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.SingleSignOnServiceUrl" class="control-label"></label>
+                <input asp-for="@Model.SingleSignOnServiceUrl" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.SingleLogoutServiceUrl" class="control-label"></label>
+                <input asp-for="@Model.SingleLogoutServiceUrl" class="form-control" />
+
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Certificate</label>
+                <div class="col-md-10">
+                    <input type="file" asp-for="@Model.FileName" class="form-control-file" id="fileName">
+                    <small id="fileName" class="form-text text-muted">Import certificate.</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
