@@ -1,46 +1,87 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Microsoft.AspNetCore.Identity
+
+
 @{
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="layout-body sso-login">
-    <div class="layout-aside">
 
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary">
+    <input type="button" name="options" id="option1" autocomplete="off">Main
+  </label>
+  <label class="btn btn-secondary">
+    <input type="button" name="options" id="option2" autocomplete="off"> Radio
+  </label>
+</div>
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary">
+        <input type="button" name="options" id="option1" autocomplete="off">+ Create new
+    </label>
+</div>
+
+
+<h2>My dashboard</h2>
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Featured
     </div>
-    <div class="layout-main">
-        <div class="layout-main-slot">
-            <h1 class="em-signup-layout_title font-monospace">Sign in with SSO</h1>
-            <div class="form-width-sm">
-                <p class="em-signup-layout_desc">Enter your company Domain. </p>
-                <form action="" class="em-form em-form-label-inline">
-                    <div class="em-form-item is-error is-required is-no-asterisk">
-                        <div class="em-form-item_content">
-                            <div class="em-input em-input-xLarge is-empty em-input-show-label base-domain">
-                                <input type="text" autocomplete="domain" name="domain" aria-required="true" aria-label="Company Domain" id="domain" maxlength="128" class="em-input_inner" aria-invalid="true" />
-                                <label for="domain" class="em-input_label">Company Domain</label>
-                                <span class="em-input_suffix">
-                                    <span class="em-input_suffix-inner">
-
-                                    </span>
-                                    <i class="em-input_icon em-input_validation em-icon-error"></i>
-                                </span>
-                            </div>
-                            <div class="domain"> .azure.net</div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="EMSUITE" />
-                </form>
-                <button disabled="disabled" aria-disabled="true" type="button" class="btn-block mgt-md em-button-primary em-button-large is-disabled em-button">
-                    <span class="em-button_slot">Continue</span>
-                </button>
-                <button type="button" class="btn-block mgt-sm em-button-link em-button-small em-button">
-                    <span class="em-button_slot">I don't know the company domain</span>
-                </button>
-            </div>
-        </div>
+    <img class="card-img-top" src="images/industryBuilding01.jpg" alt="Card image cap">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">abcd</li>
+    </ul>
+    <div class="card-footer">
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
     </div>
 </div>
 
-<h1>Sign in with SSO</h1>
-<p><a asp-area="" asp-controller="Saml" asp-action="InitiateSingleSignOn" class="btn btn-primary btn-lg">SSO to the Identity Provider</a></p>
+<div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
+    <a href="/" class="d-block p-3 linkdark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+      <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="visually-hidden">Icon-only</span>
+    </a>
+    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+      <li class="nav-item">
+        <a href="#" class="nav-link active py-3 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+          <svg class="bi" width="24" height="24" role="img" aria-label="Home"><use xlink:href="#home"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+          <svg class="bi" width="24" height="24" role="img" aria-label="Dashboard"><use xlink:href="#speedometer2"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+          <svg class="bi" width="24" height="24" role="img" aria-label="Orders"><use xlink:href="#table"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+          <svg class="bi" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"></use></svg>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+          <svg class="bi" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"></use></svg>
+        </a>
+      </li>
+    </ul>
+    <div class="dropdown border-top">
+      <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
+      </a>
+      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3" style="">
+        <li><a class="dropdown-item" href="#">New project...</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
