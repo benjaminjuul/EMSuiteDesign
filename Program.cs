@@ -1,101 +1,86 @@
-﻿using System.Security.Cryptography;
+﻿using ComponentSpace.Saml2.Certificates;
+using Microsoft.Extensions.CommandLineUtils;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 /// <summary>
-/// Creates a self-signed X.509 certificate.
+/// Validates an X.509 certificate.
 /// 
-/// Usage: dotnet CreateSelfSignedCert.dll
+/// Usage: dotnet ValidateCert.dll <fileName> [-p <password>]
+/// 
+/// where the file contains an X.509 certificate to be validated.
 /// </summary>
 try
 {
-    Console.Write("Subject distinguished name (eg CN=test): ");
-    var subjectName = Console.ReadLine();
-
-    if (string.IsNullOrEmpty(subjectName))
+    var commandLineApplication = new CommandLineApplication()
     {
-        throw new ArgumentException("A subject distinguished name must be specified.");
-    }
+        Name = "ValidateCert",
+        Description = "Validates an X.509 certificate"
+    };
 
-    Console.Write("Optional subject alternative name (eg test): ");
-    var subjectAlternativeName = Console.ReadLine();
+    commandLineApplication.HelpOption("-? | -h | --help");
 
-    var keySizeInBits = 2048;
-    Console.Write($"Key Size in bits [{keySizeInBits}]: ");
-    var input = Console.ReadLine();
+    var fileNameArgument = commandLineApplication.Argument(
+        "fileName",
+        "The X.509 certificate to be validated");
 
-    if (!string.IsNullOrEmpty(input) && !int.TryParse(input, out keySizeInBits))
+    var passwordOption = commandLineApplication.Option(
+        "-p | --password <password>",
+        "The certificate file password",
+        CommandOptionType.SingleValue);
+
+    commandLineApplication.OnExecute(() =>
     {
-        throw new ArgumentException("The key size must be an integer.");
-    }
+        if (string.IsNullOrEmpty(fileNameArgument.Value))
+        {
+            Console.WriteLine("The file name is missing.");
+            commandLineApplication.ShowHelp();
 
-    var yearsBeforeExpiring = 5;
-    Console.Write($"Number of years before expiring [{yearsBeforeExpiring}]: ");
-    input = Console.ReadLine();
+            return -1;
+        }
 
-    if (!string.IsNullOrEmpty(input) && !int.TryParse(input, out yearsBeforeExpiring))
-    {
-        throw new ArgumentException("The number of years must be an integer.");
-    }
+        ValidateCert(fileNameArgument.Value, passwordOption.Value());
 
-    using var privateKey = RSA.Create(keySizeInBits);
+        return 0;
+    });
 
-    var certificateRequest = new CertificateRequest(subjectName, privateKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-
-    certificateRequest.CertificateExtensions.Add(
-        new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.DataEncipherment | X509KeyUsageFlags.KeyEncipherment, false));
-
-    if (!string.IsNullOrEmpty(subjectAlternativeName))
-    {
-        var subjectAlternativeNameBuilder = new SubjectAlternativeNameBuilder();
-
-        subjectAlternativeNameBuilder.AddDnsName(subjectAlternativeName);
-        certificateRequest.CertificateExtensions.Add(subjectAlternativeNameBuilder.Build());
-    }
-
-    var notBefore = DateTimeOffset.UtcNow;
-    var notAfter = notBefore.AddYears(yearsBeforeExpiring);
-
-    using var x509Certificate = certificateRequest.CreateSelfSigned(notBefore, notAfter);
-
-    Console.Write("Certificate file name (eg test.cer): ");
-    var fileName = Console.ReadLine();
-
-    if (string.IsNullOrEmpty(fileName))
-    {
-        throw new ArgumentException("A file name must be specified.");
-    }
-
-    var stringBuilder = new StringBuilder();
-
-    stringBuilder.AppendLine("-----BEGIN CERTIFICATE-----");
-    stringBuilder.AppendLine(Convert.ToBase64String(x509Certificate.Export(X509ContentType.Cert), Base64FormattingOptions.InsertLineBreaks));
-    stringBuilder.AppendLine("-----END CERTIFICATE-----");
-
-    File.WriteAllText(fileName, stringBuilder.ToString());
-    Console.WriteLine($"The certificate has been saved to {fileName}.");
-
-    Console.Write("Private key file name (eg test.pfx): ");
-    fileName = Console.ReadLine();
-
-    if (string.IsNullOrEmpty(fileName))
-    {
-        throw new ArgumentException("A file name must be specified.");
-    }
-
-    Console.Write("Private key password: ");
-    var password = Console.ReadLine();
-
-    if (string.IsNullOrEmpty(password))
-    {
-        throw new ArgumentException("A password must be specified.");
-    }
-
-    File.WriteAllBytes(fileName, x509Certificate.Export(X509ContentType.Pfx, password));
-    Console.WriteLine($"The private key has been saved to {fileName}.");
+    commandLineApplication.Execute(args);
 }
 
 catch (Exception exception)
 {
     Console.WriteLine(exception.ToString());
+}
+
+static void ValidateCert(string fileName, string password)
+{
+    if (!File.Exists(fileName))
+    {
+        throw new ArgumentException($"The file {fileName} doesn't exist.");
+    }
+
+    var x509Certificate = new X509Certificate2(fileName, password, X509KeyStorageFlags.EphemeralKeySet);
+
+    var serviceCollection = new ServiceCollection();
+
+    serviceCollection.AddLogging(builder =>
+    {
+        builder.SetMinimumLevel(LogLevel.Debug);
+        builder.AddConsole();
+    });
+
+    serviceCollection.Configure<CertificateValidationOptions>(options =>
+    {
+        options.EnableChainCheck = true;
+    });
+
+    serviceCollection.AddSaml();
+
+    using var serviceProvider = serviceCollection.BuildServiceProvider();
+
+    foreach (var certificateValidator in serviceProvider.GetServices<ICertificateValidator>())
+    {
+        certificateValidator.Validate(x509Certificate);
+    }
 }
